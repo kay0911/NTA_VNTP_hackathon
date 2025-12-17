@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Output
+answers_raw.txt
+answers_time.csv
+submission.csv
+submission_time.csv
+
+# Secrets
+api-keys.json
+.env
+
+# Test private
+private_test.json
+
+# Editor
+.vscode/
+.idea/
