@@ -7,9 +7,40 @@ Hệ thống thực hiện suy luận và trả lời câu hỏi trắc nghiệm
 ---
 
 ## Pipeline Flow
-- Phân loại câu hỏi thành các nhóm: **Normal, Many choices, RAG, STEM**
-- Xử lý theo batch để tối ưu số lần gọi API
-- Sử dụng prompt chuyên biệt cho từng loại câu hỏi
+- Phân loại câu hỏi thành các nhóm: **Sensitive,Normal, Many choices, RAG, STEM**.
+- Xử lý theo các gói câu hỏi thay vì chỉ 1 câu mỗi để tối ưu số lần gọi API, thời gian trả lời.
+- Sử dụng prompt chuyên biệt cho từng loại câu hỏi(cân đối giữa độ chính xác và thơi gian.
+- Sơ đồ Pipeline.
+```mermaid
+
+flowchart LR
+    A[Bộ câu hỏi] -->|Input| B[Phần Classify]
+
+    B -->|Base rule| C1[sensitive_q]
+    B -->|Base rule| C2[rag_q]
+    B -->|Base rule| C3[stem_q]
+    B -->|Base rule| C4[many_q]
+    B -->|Base rule| C5[normal_q]
+
+    C1 -->|Answer rule| F[ANSWER]
+    C2 --> D[Phần Build]
+    C3 --> D
+    C4 --> D
+    C5 --> D
+
+    D -->|Chia gói rag_q 10 câu| E1[Prompt riêng cho RAG]
+    D -->|Chia gói stem_q 5 câu| E2[Prompt riêng cho STEM]
+    D -->|Chia gói many_q 10 câu| E3[Prompt riêng cho MANY]
+    D -->|Chia gói normal_q 10 câu| E4[Prompt riêng cho NORMAL]
+
+    E1 --> F[ANSWER]
+    E2 --> F
+    E3 --> F
+    E4 --> F
+
+    F -->|Output| G1[submission.csv]
+	F -->|Log time| G2[submission_time.csv]
+```
 
 ---
 
@@ -70,36 +101,7 @@ Sau khi container chạy xong, trong **thư mục hiện tại trên máy** sẽ
 * `submission_time.csv`
 
 ---
-```mermaid
 
-flowchart LR
-    A[Bộ câu hỏi] -->|Input| B[Phần Classify]
-
-    B -->|Gán nhãn| C1[sensitive_q]
-    B -->|Gán nhãn| C2[rag_q]
-    B -->|Gán nhãn| C3[stem_q]
-    B -->|Gán nhãn| C4[many_q]
-    B -->|Gán nhãn| C5[normal_q]
-
-    C1 -->|Base rule| F[ANSWER]
-    C2 --> D
-    C3 --> D
-    C4 --> D
-    C5 --> D
-
-    D -->|Chia gói rag_q 10 câu| E1[Prompt riêng cho RAG]
-    D -->|Chia gói stem_q 5 câu| E2[Prompt riêng cho STEM]
-    D -->|Chia gói many_q 10 câu| E3[Prompt riêng cho MANY]
-    D -->|Chia gói normal_q 10 câu| E4[Prompt riêng cho NORMAL]
-
-    E1 --> F[ANSWER]
-    E2 --> F
-    E3 --> F
-    E4 --> F
-
-    F -->|Output| G1[submission.csv]
-	F -->|Log time| G2[submission_time.csv]
-```
 
 
 
