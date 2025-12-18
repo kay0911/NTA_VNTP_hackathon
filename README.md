@@ -70,6 +70,7 @@ Sau khi container chạy xong, trong **thư mục hiện tại trên máy** sẽ
 * `submission_time.csv`
 
 ---
+```mermaid
 
 flowchart LR
     A[Bộ câu hỏi] --> B[Phần Classify]
@@ -103,7 +104,7 @@ flowchart LR
     E3 --> F2
     E4 --> F2
     E5 --> F2
-
+```
 
 
 
