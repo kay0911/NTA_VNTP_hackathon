@@ -1,4 +1,4 @@
-# VNPT BTC 2025 – Track 2: The Builder
+# VNPT HACKATHON 2025 – Track 2: The Builder
 
 ## Mô tả
 Repository này chứa giải pháp tham gia **VNPT Blockchain & AI Hackathon 2025 – Track 2 (The Builder)**.  
