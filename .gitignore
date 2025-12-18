@@ -11,6 +11,7 @@ submission_time.csv
 
 # Secrets
 api-keys.json
+test.py
 .env
 
 # Test private

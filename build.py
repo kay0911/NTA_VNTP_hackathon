@@ -128,7 +128,7 @@ def merge_time_into_answers(
 
 
 ANSWER_PATTERN = re.compile(
-    r"<ANSWER>\s*(test_\d+)\s*,\s*([A-Z])\s*</ANSWER>",
+    r"<ANSWER>\s*([\w\d_]+)\s*,\s*([A-Z])\s*</ANSWER>",
     re.IGNORECASE
 )
 
