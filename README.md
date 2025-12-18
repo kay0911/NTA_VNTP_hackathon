@@ -68,7 +68,7 @@ docker pull kay0911/nta-vnpt-hackathon-track2
 
 ### 2️⃣ Chuẩn bị dữ liệu đầu vào
 
-* Đặt file **`private_test.json`** và **api-keys.json** có cấu trúc tương tự api-keys.json mà mỗi đội được cấp vào một thư mục bất kỳ trên máy
+* Đặt file **`private_test.json`** và **`api-keys.json`** có cấu trúc tương tự api-keys.json mà mỗi đội được cấp vào một thư mục bất kỳ trên máy
 * Mở terminal (hoặc CMD / PowerShell) **tại thư mục chứa file này**
 
 ---
