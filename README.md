@@ -8,8 +8,13 @@ Hệ thống thực hiện suy luận và trả lời câu hỏi trắc nghiệm
 
 ## Pipeline Flow
 - Phân loại câu hỏi thành các nhóm: **Sensitive,Normal, Many choices, RAG, STEM**.
++ Sensitive: là những câu hỏi nhạy cảm liên quan đến chống phá chính quyền và phạm tội.
++ RAG: là những câu hỏi chứa các đoạn thông tin rất dài
++ STEM: là những câu hỏi về Toán, Lý, Hóa, Kinh tế, Tài chính, Định lượng, Suy luận.
++ Many choices: những câu hỏi có nhiều hơn 4 đáp án(tránh nhầm lẫn giúp cái câu hỏi normal có thể trả lời nhanh hơn).
++ Normal: những câu hỏi còn lại.
 - Xử lý theo các gói câu hỏi thay vì chỉ 1 câu mỗi để tối ưu số lần gọi API, thời gian trả lời.
-- Sử dụng prompt chuyên biệt cho từng loại câu hỏi(cân đối giữa độ chính xác và thơi gian.
+- Sử dụng prompt chuyên biệt cho từng loại câu hỏi(cân đối giữa độ chính xác và thời gian).
 - Sơ đồ Pipeline.
 ```mermaid
 
@@ -60,14 +65,8 @@ docker pull kay0911/nta-vnpt-hackathon-track2
 
 ### 2️⃣ Chuẩn bị dữ liệu đầu vào
 
-* Đặt file **`private_test.json`** vào một thư mục bất kỳ trên máy
+* Đặt file **`private_test.json`** và **api-keys.json** vào một thư mục bất kỳ trên máy
 * Mở terminal (hoặc CMD / PowerShell) **tại thư mục chứa file này**
-
-Ví dụ:
-
-```text
-/private_test.json
-```
 
 ---
 
@@ -76,19 +75,19 @@ Ví dụ:
 #### 🔹 Linux / macOS (Terminal)
 
 ```bash
-docker run -v $(pwd)/private_test.json:/code/private_test.json -v $(pwd):/output kay0911/nta-vnpt-hackathon-track2
+docker run -v $(pwd)/private_test.json:/code/private_test.json -v ${pwd}\api-keys.json:/code/api-keys.json -v $(pwd):/output kay0911/nta-vnpt-hackathon-track2
 ```
 
 #### 🔹 Windows (CMD)
 
 ```cmd
-docker run -v %cd%\private_test.json:/code/private_test.json -v %cd%:/output kay0911/nta-vnpt-hackathon-track2
+docker run -v %cd%\private_test.json:/code/private_test.json -v %cd%:\api-keys.json:/code/api-keys.json -v %cd%:/output kay0911/nta-vnpt-hackathon-track2
 ```
 
 #### 🔹 Windows (PowerShell)
 
 ```powershell
-docker run -v ${PWD}\private_test.json:/code/private_test.json -v ${PWD}:/output kay0911/nta-vnpt-hackathon-track2
+docker run -v ${PWD}\private_test.json:/data/private_test.json -v ${PWD}\api-keys.json:/code/api-keys.json -v ${PWD}:/output kay0911/nta-vnpt-hackathon-track2
 ```
 
 ---
