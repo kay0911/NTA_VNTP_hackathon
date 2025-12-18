@@ -46,7 +46,10 @@ flowchart LR
     F -->|Output| G1[submission.csv]
 	F -->|Log time| G2[submission_time.csv]
 ```
-
+- Lý do chọn phương án trên:
++ Bộ câu hỏi đầu vào không được gán nhãn, rất khó để có để xây dựng một mô hình phân loại.
++ RAG cũng rất khó vì chủ để của câu hỏi rất đa dạng, để phủ tài liệu đủ để tăng được độ chính xác đáng kể cần rất nhiêu. Còn một nhược điểm của RAG phải tối ưu việc tìm kiếm không tốt có thể dẫn đến hallucination (llm bịa câu trả lời).
++ Lượng câu hỏi của private_test lớn (2000 câu), xây dựng các rule base và tối ưu prompt cho từng loại câu hỏi, trả lời nhiều câu cùng lúc sẽ giúp tăng độ chính xác và tốc độ đáng kể.
 ---
 
 ## Cách chạy dự án
@@ -65,7 +68,7 @@ docker pull kay0911/nta-vnpt-hackathon-track2
 
 ### 2️⃣ Chuẩn bị dữ liệu đầu vào
 
-* Đặt file **`private_test.json`** và **api-keys.json** vào một thư mục bất kỳ trên máy
+* Đặt file **`private_test.json`** và **api-keys.json** có cấu trúc tương tự api-keys.json mà mỗi đội được cấp vào một thư mục bất kỳ trên máy
 * Mở terminal (hoặc CMD / PowerShell) **tại thư mục chứa file này**
 
 ---
