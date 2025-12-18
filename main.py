@@ -5,6 +5,14 @@ from classify import classify_dataset
 from load_data import private_test_data
 from chatbot import LLM_Calling, Prompt
 from build import build_blocks, append_raw_text, clear_txt_file, run_sensitive_questions, parse, question_time, clear_csv, merge_time_into_answers
+import os
+
+OUTPUT_DIR = "/output"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+SUBMISSION_FILE = os.path.join(OUTPUT_DIR, "submission.csv")
+TIME_FILE = os.path.join(OUTPUT_DIR, "submission_time.csv")
+
 
 def main():
     # =========================
@@ -134,5 +142,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    parse()
-    merge_time_into_answers()
+    parse(SUBMISSION_FILE)
+    merge_time_into_answers(file_answer=SUBMISSION_FILE,output_file=TIME_FILE)

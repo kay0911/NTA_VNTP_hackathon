@@ -68,7 +68,7 @@ def safe_answer_from_choices(qid: str, choices: str) -> str | None:
             ans = line.split(".", 1)[0].strip()  # A / B / C / D
             return f"<ANSWER>{qid},{ans}</ANSWER>"
 
-    return None
+    return f"<ANSWER>{qid},A</ANSWER>"
 
 def is_sensitive_question(question: str, choices: list[str]) -> bool:
     text = question.lower() + " " + " ".join(c.lower() for c in choices)

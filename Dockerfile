@@ -22,4 +22,6 @@ COPY . .
 
 RUN chmod +x inference.sh
 
+ENV PYTHONUNBUFFERED=1
+
 CMD ["bash", "inference.sh"]

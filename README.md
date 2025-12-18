@@ -6,7 +6,7 @@ Hệ thống thực hiện suy luận và trả lời câu hỏi trắc nghiệm
 
 ---
 
-## Phương pháp
+## Pipeline Flow
 - Phân loại câu hỏi thành các nhóm: **Normal, Many choices, RAG, STEM**
 - Xử lý theo batch để tối ưu số lần gọi API
 - Sử dụng prompt chuyên biệt cho từng loại câu hỏi
@@ -45,19 +45,19 @@ Ví dụ:
 #### 🔹 Linux / macOS (Terminal)
 
 ```bash
-docker run -v $(pwd)/private_test.json:/code/private_test.json kay0911/nta-vnpt-hackathon-track2
+docker run -v $(pwd)/private_test.json:/code/private_test.json -v $(pwd):/output kay0911/nta-vnpt-hackathon-track2
 ```
 
 #### 🔹 Windows (CMD)
 
 ```cmd
-docker run -v %cd%\private_test.json:/code/private_test.json kay0911/nta-vnpt-hackathon-track2
+docker run -v %cd%\private_test.json:/code/private_test.json -v %cd%:/output kay0911/nta-vnpt-hackathon-track2
 ```
 
 #### 🔹 Windows (PowerShell)
 
 ```powershell
-docker run -v ${PWD}/private_test.json:/code/private_test.json kay0911/nta-vnpt-hackathon-track2
+docker run -v ${PWD}\private_test.json:/code/private_test.json -v ${PWD}:/output kay0911/nta-vnpt-hackathon-track2
 ```
 
 ---
@@ -70,28 +70,6 @@ Sau khi container chạy xong, trong **thư mục hiện tại trên máy** sẽ
 * `submission_time.csv`
 
 ---
-
-### 🔁 (Tùy chọn) Mount toàn bộ thư mục để lưu kết quả rõ ràng hơn
-
-Nếu muốn **vừa đưa dữ liệu vào, vừa lấy toàn bộ file kết quả ra**, có thể mount cả thư mục:
-
-#### 🔹 Linux / macOS
-
-```bash
-docker run -v $(pwd):/code kay0911/nta-vnpt-hackathon-track2
-```
-
-#### 🔹 Windows (CMD)
-
-```cmd
-docker run -v %cd%:/code kay0911/nta-vnpt-hackathon-track2
-```
-
-#### 🔹 Windows (PowerShell)
-
-```powershell
-docker run -v ${PWD}:/code kay0911/nta-vnpt-hackathon-track2
-```
 
 
 
