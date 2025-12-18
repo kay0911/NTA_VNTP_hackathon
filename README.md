@@ -73,37 +73,32 @@ Sau khi container chạy xong, trong **thư mục hiện tại trên máy** sẽ
 ```mermaid
 
 flowchart LR
-    A[Bộ câu hỏi] --> B[Phần Classify]
+    A[Bộ câu hỏi] -->|Input| B[Phần Classify]
 
-    B --> C1[Precision-Critical]
-    B --> C2[Compulsory]
-    B --> C3[RAG]
-    B --> C4[STEM]
-    B --> C5[Multi-Domain]
+    B -->|Gán nhãn| C1[sensitive_q]
+    B -->|Gán nhãn| C2[rag_q]
+    B -->|Gán nhãn| C3[stem_q]
+    B -->|Gán nhãn| C4[many_q]
+    B -->|Gán nhãn| C5[normal_q]
 
-    C1 --> D1[Build: Chia gói 5–10 câu]
-    C2 --> D2[Build: Chia gói 5–10 câu]
-    C3 --> D3[Build: Chia gói 5–10 câu]
-    C4 --> D4[Build: Chia gói 5–10 câu]
-    C5 --> D5[Build: Chia gói 5–10 câu]
+    C1 -->|Base rule| F[ANSWER]
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    C5 --> D
 
-    D1 --> E1[Prompt riêng cho Precision-Critical]
-    D2 --> E2[Prompt riêng cho Compulsory]
-    D3 --> E3[Prompt riêng cho RAG]
-    D4 --> E4[Prompt riêng cho STEM]
-    D5 --> E5[Prompt riêng cho Multi-Domain]
+    D -->|Chia gói rag_q 10 câu| E1[Prompt riêng cho RAG]
+    D -->|Chia gói stem_q 5 câu| E2[Prompt riêng cho STEM]
+    D -->|Chia gói many_q 10 câu| E3[Prompt riêng cho MANY]
+    D -->|Chia gói normal_q 10 câu| E4[Prompt riêng cho NORMAL]
 
-    E1 --> F1[submission.csv]
-    E2 --> F1
-    E3 --> F1
-    E4 --> F1
-    E5 --> F1
+    E1 --> F[ANSWER]
+    E2 --> F
+    E3 --> F
+    E4 --> F
 
-    E1 --> F2[submission_time.csv]
-    E2 --> F2
-    E3 --> F2
-    E4 --> F2
-    E5 --> F2
+    F -->|Output| G1[submission.csv]
+	F -->|Log time| G2[submission_time.csv]
 ```
 
 
