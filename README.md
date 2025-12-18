@@ -8,11 +8,11 @@ Hệ thống thực hiện suy luận và trả lời câu hỏi trắc nghiệm
 
 ## Pipeline Flow
 - Phân loại câu hỏi thành các nhóm: **Sensitive,Normal, Many choices, RAG, STEM**.
-+ Sensitive: là những câu hỏi nhạy cảm liên quan đến chống phá chính quyền và phạm tội.
-+ RAG: là những câu hỏi chứa các đoạn thông tin rất dài
-+ STEM: là những câu hỏi về Toán, Lý, Hóa, Kinh tế, Tài chính, Định lượng, Suy luận.
-+ Many choices: những câu hỏi có nhiều hơn 4 đáp án(tránh nhầm lẫn giúp cái câu hỏi normal có thể trả lời nhanh hơn).
-+ Normal: những câu hỏi còn lại.
+    + Sensitive: là những câu hỏi nhạy cảm liên quan đến chống phá chính quyền và phạm tội.
+    + RAG: là những câu hỏi chứa các đoạn thông tin rất dài
+    + STEM: là những câu hỏi về Toán, Lý, Hóa, Kinh tế, Tài chính, Định lượng, Suy luận.
+    + Many choices: những câu hỏi có nhiều hơn 4 đáp án(tránh nhầm lẫn giúp cái câu hỏi normal có thể trả lời nhanh hơn).
+    + Normal: những câu hỏi còn lại.
 - Xử lý theo các gói câu hỏi thay vì chỉ 1 câu mỗi để tối ưu số lần gọi API, thời gian trả lời.
 - Sử dụng prompt chuyên biệt cho từng loại câu hỏi(cân đối giữa độ chính xác và thời gian).
 - Sơ đồ Pipeline.
@@ -47,9 +47,9 @@ flowchart LR
 	F -->|Log time| G2[submission_time.csv]
 ```
 - Lý do chọn phương án trên:
-+ Bộ câu hỏi đầu vào không được gán nhãn, rất khó để có để xây dựng một mô hình phân loại.
-+ RAG cũng rất khó vì chủ để của câu hỏi rất đa dạng, để phủ tài liệu đủ để tăng được độ chính xác đáng kể cần rất nhiêu. Còn một nhược điểm của RAG phải tối ưu việc tìm kiếm không tốt có thể dẫn đến hallucination (llm bịa câu trả lời).
-+ Lượng câu hỏi của private_test lớn (2000 câu), xây dựng các rule base và tối ưu prompt cho từng loại câu hỏi, trả lời nhiều câu cùng lúc sẽ giúp tăng độ chính xác và tốc độ đáng kể.
+    + Bộ câu hỏi đầu vào không được gán nhãn, rất khó để có để xây dựng một mô hình phân loại.
+    + RAG cũng rất khó vì chủ để của câu hỏi rất đa dạng, để phủ tài liệu đủ để tăng được độ chính xác đáng kể cần rất nhiêu. Còn một nhược điểm của RAG phải tối ưu việc tìm kiếm không tốt có thể dẫn đến hallucination (llm bịa câu trả lời).
+    + Lượng câu hỏi của private_test lớn (2000 câu), xây dựng các rule base và tối ưu prompt cho từng loại câu hỏi, trả lời nhiều câu cùng lúc sẽ giúp tăng độ chính xác và tốc độ đáng kể.
 ---
 
 ## Cách chạy dự án
