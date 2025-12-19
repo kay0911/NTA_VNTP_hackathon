@@ -35,6 +35,10 @@ def append_raw_text(text, path="answers_raw.txt"):
         f.write(text.strip())
         f.write("\n\n")   # cách block
 
+def answer(qid,ans="A"):
+    return f"<ANSWER>{qid},{ans}</ANSWER>"
+
+
 def clear_txt_file(path="answers_raw.txt"):
     """Xóa toàn bộ nội dung file txt (giữ lại file trống)"""
     with open(path, "w", encoding="utf-8"):

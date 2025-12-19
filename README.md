@@ -48,7 +48,7 @@ flowchart LR
 ```
 - Lý do chọn phương án trên:
     + Bộ câu hỏi đầu vào không được gán nhãn, rất khó để có để xây dựng một mô hình phân loại.
-    + RAG cũng rất khó vì chủ để của câu hỏi rất đa dạng, để phủ tài liệu đủ để tăng được độ chính xác đáng kể cần rất nhiêu. Còn một nhược điểm của RAG phải tối ưu việc tìm kiếm không tốt có thể dẫn đến hallucination (llm bịa câu trả lời).
+    + RAG cũng rất khó vì chủ để của câu hỏi rất đa dạng, để phủ tài liệu đủ để tăng được độ chính xác đáng kể cần rất nhiêu. Còn một nhược điểm của RAG phải tối ưu việc tìm kiếm không tốt, có thể dẫn đến hallucination (llm bịa câu trả lời).
     + Lượng câu hỏi của private_test lớn (2000 câu), xây dựng các rule base và tối ưu prompt cho từng loại câu hỏi, trả lời nhiều câu cùng lúc sẽ giúp tăng độ chính xác và tốc độ đáng kể.
 ---
 
@@ -90,7 +90,7 @@ docker run -v %cd%\private_test.json:/code/private_test.json -v %cd%:\api-keys.j
 #### 🔹 Windows (PowerShell)
 
 ```powershell
-docker run -v ${PWD}\private_test.json:/data/private_test.json -v ${PWD}\api-keys.json:/code/api-keys.json -v ${PWD}:/output kay0911/nta-vnpt-hackathon-track2
+docker run -v ${PWD}\private_test.json:/code/private_test.json -v ${PWD}\api-keys.json:/code/api-keys.json -v ${PWD}:/output kay0911/nta-vnpt-hackathon-track2
 ```
 
 ---

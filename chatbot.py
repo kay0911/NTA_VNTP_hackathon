@@ -128,12 +128,19 @@ def LLM_Calling(model="LLM small",temp=0.0,p=1.0,k=20,tokens = 512,prompt="",s_p
             link_endpoint,
             headers=headers,
             json=json_data,
+            timeout=60
         )
+    except requests.exceptions.Timeout:
+        return "[TIMEOUT] LLM request timed out", False
+    except requests.exceptions.ConnectionError as e:
+        return f"[CONNECTION_ERROR] {e}", False
     except Exception as e:
-        return f"[REQUEST_ERROR] {e}"
+        return f"[REQUEST_ERROR] {e}", False
 
     answer, message = extract_llm_content(response)
 
-    # ✅ CHỈ return 1 string
-    return answer if answer is not None else message
+    if answer is not None:
+        return answer, True
+    else:
+        return message, False
 

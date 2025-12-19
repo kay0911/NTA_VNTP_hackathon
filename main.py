@@ -4,7 +4,7 @@ from datetime import datetime
 from classify import classify_dataset
 from load_data import private_test_data
 from chatbot import LLM_Calling, Prompt
-from build import build_blocks, append_raw_text, clear_txt_file, run_sensitive_questions, parse, question_time, clear_csv, merge_time_into_answers
+from build import build_blocks, append_raw_text, clear_txt_file, run_sensitive_questions, parse, question_time, clear_csv, merge_time_into_answers, answer
 import os
 
 OUTPUT_DIR = "/output"
@@ -82,7 +82,7 @@ def main():
             start = time.perf_counter()
         
             S_prompt, prompt = Prompt(block[0], type=q_type)
-            answer = LLM_Calling(
+            answer, ok = LLM_Calling(
                 model=MODEL_NAME[q_type],
                 tokens=MAX_TOKENS_SIZE[q_type],
                 temp=Temp[q_type],
@@ -92,6 +92,10 @@ def main():
             append_raw_text(answer)
 
             elapsed = time.perf_counter() - start
+            if ok == False:
+                for qid in block[1]:
+                    ans = answer(qid)
+                    append_raw_text(ans)
 
             for qid in block[1]:
                 question_time(qid,elapsed/len(block[1]))
